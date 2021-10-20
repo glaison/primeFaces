@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+>
+<h:head>
+	<meta charset="UTF-8" />
+
+	<h:outputStylesheet library="css" name="estilo.css" />
+	<h:outputScript library="js" name="script.js" />
+
+
+
+	<title>Cadastro de Pessoa</title>
+
+</h:head>
+
+<h:body class="body">
+
+	<header>
+		<h:graphicImage library="imagens" name="anhanguera-logo.png">
+		</h:graphicImage>
+		
+			<div style="float: right; margin-right: 20px; margin-top: 8px">
+			Olá #{loginBean.nomeUsuario}!</div>
+	</header>
+
+
+	
+
+	<h:form id="formCadPessoa">
+
+			<p:menubar style="margin-top: -20px; margin-bottom: 20px">
+				<p:submenu label="Cadastros">
+					<p:menuitem value="Pessoa" action="index?faces-redirect=true" />
+		
+				</p:submenu>
+				<p:submenu label="Consultas">
+					<p:menuitem value="Pessoas" action="resultado?faces-redirect=true" />
+			
+				</p:submenu>
+				<p:submenu label="Sistema">
+					<p:menuitem value="Sair" action="#{loginBean.logout}" />
+				</p:submenu>
+			</p:menubar>
+			
+<h1>Cadastro de pesssoa</h1>
+
+			<h:form id="Cadastro">
+				<h:panelGrid columns="2">
+				<h:outputLabel value="Nome:">
+					</h:outputLabel>
+					<h:inputText name="txtNome" id="txtNome" onclick="this.value = '';"
+						onchange="this.value = this.value.toUpperCase();"
+						value="#{pessoaBean.nome}" />
+
+
+					<h:outputLabel value="Idade:">
+					</h:outputLabel>
+					<h:inputText value="#{pessoaBean.idade}" />
+
+					<h:outputLabel value="E-mail:">
+					</h:outputLabel>
+					<h:inputText value="#{pessoaBean.email}" />
+
+
+					<h:outputLabel value="Telefone:">
+					</h:outputLabel>
+					<h:inputText value="#{pessoaBean.telefone}" />
+
+
+					<h:outputLabel value="Observações:">
+					</h:outputLabel>
+					<h:inputTextarea value="#{pessoaBean.observacao}" />
+				</h:panelGrid>
+
+
+
+				<h:commandButton id="Cadastrar" value="Cadastrar"
+					action="#{pessoaBean.salvar}" /> |
+			<h:commandButton id="Consultar" value="Consultar" action="resultado" /> |
+			<h:commandButton id="Atualizar" value="Atualizar"
+					action="#{pessoaBean.atualizar}" /> |
+			<h:commandButton id="Limpar" value="limpar" type="reset" /> 
+			
+
+
+
+			</h:form>
+
+
+			<hr />
+
+			<h:dataTable border="1" value="#{pessoaBean.pessoaList}" var="pessoa">
+				<f:facet name="header"> Lista de Clientes Cadastrados</f:facet>
+
+				<h:column>
+					<f:facet name="header">
+				Código
+					</f:facet>
+					<h:outputText value="#{pessoa.id}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+				Nome
+			</f:facet>
+					<!--  #{pessoa.nome} -->
+					<h:outputText value="#{pessoa.nome}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+				Idade
+			</f:facet>
+					<h:outputText value="#{pessoa.idade}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+				Email
+			</f:facet>
+					<h:outputText value="#{pessoa.email}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+				Telefone
+			</f:facet>
+					<h:outputText value="#{pessoa.telefone}" />
+				</h:column>
+
+
+				<h:column>
+					<f:facet name="header">
+				Observação
+			</f:facet>
+					<h:outputText value="#{pessoa.observacao}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+					Ações
+				</f:facet>
+					<h:commandLink value="Excluir"
+						action="#{pessoaBean.deletar(pessoa.id)}" /> |
+				
+				<h:commandLink value="Editar"
+						action="#{pessoaBean.consultarPorId(pessoa.id)}" /> |
+				
+	
+			</h:column>
+
+
+
+
+
+			</h:dataTable>
+
+
+		</h:form>
+
+		<footer> Rodapé </footer>
+</h:body>
+</html>

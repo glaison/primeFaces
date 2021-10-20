@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Login</title>
+	<h:outputStylesheet library="css" name="estilo.css" />
+
+
+
+</h:head>
+<h:body>
+	<header>
+		<h:graphicImage library="imagens" name="anhanguera-logo.png">
+		</h:graphicImage>
+
+		<div style="float: right; margin-right: 20px; margin-top: 8px">
+			Olá #{usuario.nome}!</div>
+	</header>
+
+
+	<div id="login-dialog">
+		<h1>Login</h1>
+		<h:form id="frm">
+
+			<p:messages showDetail="true" showSumary="true"
+				errorStyle="color:red" infoStyle="color:green"
+				warnStyle="color:orage" fatalStyle="color:gray" />
+				
+
+			<p:messages autoUpdate="true" />
+			<h:panelGrid columns="2" styleClass="grid-login">
+				<p:outputLabel value="Usuário" for="usuario" />
+				<p:inputText id="usuario" size="20" value="#{loginBean.nomeUsuario}" />
+				<p:outputLabel value="Senha" for="senha" />
+				<p:password id="senha" size="20" value="#{loginBean.senha}" />
+				<p:outputLabel />
+				
+				
+				<p:commandButton id="Acessar" type="submit" value="Cadastrar"
+			    icon="pi pi-sign-in"
+				action="#{loginBean.login}"
+				update="frm" validadeClient="true"
+ 				ajax="false" /> 
+ 				
+			</h:panelGrid>
+		</h:form>
+	</div>
+</h:body>
+</html>
